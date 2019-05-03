@@ -1,11 +1,55 @@
 {
-  "name": "gatsby-datocms-demo",
-  "description": "Gatsby DatoCMS creative portfolio demo",
-  "version": "1.0.0",
-  "author": "Stefano Verna <s.verna@datocms.com>",
+  "name": "academy_generator",
+  "version": "0.7.0",
+  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "repository": {
+    "type": "git",
+    "url": "git://gitlab.com/maieuticallabs/academy_generator.git"
+  },
   "engines": {
     "npm": ">=3",
     "node": ">=5"
+  },
+  "author": "Maieutical Labs",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "analyze:clean": "rimraf stats.json",
+    "preanalyze": "yarn run analyze:clean",
+    "analyze": "node ./internals/scripts/analyze.js",
+    "extract-intl": "babel-node --presets env,stage-0 -- ./internals/scripts/extract-intl.js",
+    "npmcheckversion": "node ./internals/scripts/npmcheckversion.js",
+    "preinstall": "yarn run npmcheckversion",
+    "postinstall": "yarn run build:dll",
+    "prebuild": "yarn run build:clean",
+    "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
+    "build:clean": "rimraf ./build",
+    "build:dll": "node ./internals/scripts/dependencies.js",
+    "start": "cross-env NODE_ENV=development node server",
+    "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
+    "start:production": "yarn run test && yarn run build && yarn run start:prod",
+    "start:prod": "cross-env NODE_ENV=production node server",
+    "presetup": "yarn add -D chalk shelljs",
+    "setup": "node ./internals/scripts/setup.js",
+    "postsetup": "yarn run build:dll",
+    "clean": "shjs ./internals/scripts/clean.js",
+    "clean:all": "yarn run analyze:clean && yarn run test:clean && yarn run build:clean",
+    "generate": "plop --plopfile internals/generators/index.js",
+    "lint": "yarn run lint:js",
+    "lint:css": "stylelint './app/**/*.js'",
+    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
+    "lint:js": "yarn run lint:eslint -- . ",
+    "lint:eslint:fix": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts --fix",
+    "lint:staged": "lint-staged",
+    "pretest": "yarn run test:clean",
+    "test:clean": "rimraf ./coverage",
+    "test": "cross-env NODE_OPTIONS=--max_old_space_size=2048 NODE_ENV=test jest --coverage  --verbose=false",
+    "test:lint": "yarn run lint && cross-env NODE_ENV=test jest --coverage  --verbose=false",
+    "test:watch": "cross-env NODE_ENV=test jest --watchAll --verbose=false",
+    "test:watchcoverage": "cross-env NODE_ENV=test jest --watchAll --coverage  --verbose=false",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "prettify": "prettier --write"
   },
   "lint-staged": {
     "*.js": [
@@ -266,53 +310,6 @@
       "html"
     ]
   },
-  "scripts": {
-    "analyze:clean": "rimraf stats.json",
-    "preanalyze": "yarn run analyze:clean",
-    "analyze": "node ./internals/scripts/analyze.js",
-    "extract-intl": "babel-node --presets env,stage-0 -- ./internals/scripts/extract-intl.js",
-    "npmcheckversion": "node ./internals/scripts/npmcheckversion.js",
-    "preinstall": "yarn run npmcheckversion",
-    "postinstall": "yarn run build:dll",
-    "prebuild": "yarn run build:clean",
-    "build:clean": "rimraf ./build",
-    "build:dll": "node ./internals/scripts/dependencies.js",
-    "start": "cross-env NODE_ENV=development node server",
-    "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
-    "start:production": "yarn run test && yarn run build && yarn run start:prod",
-    "start:prod": "cross-env NODE_ENV=production node server",
-    "presetup": "yarn add -D chalk shelljs",
-    "setup": "node ./internals/scripts/setup.js",
-    "postsetup": "yarn run build:dll",
-    "clean": "shjs ./internals/scripts/clean.js",
-    "clean:all": "yarn run analyze:clean && yarn run test:clean && yarn run build:clean",
-    "generate": "plop --plopfile internals/generators/index.js",
-    "lint": "yarn run lint:js",
-    "lint:css": "stylelint './app/**/*.js'",
-    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
-    "lint:js": "yarn run lint:eslint -- . ",
-    "lint:eslint:fix": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts --fix",
-    "lint:staged": "lint-staged",
-    "pretest": "yarn run test:clean",
-    "test:clean": "rimraf ./coverage",
-    "test": "cross-env NODE_OPTIONS=--max_old_space_size=2048 NODE_ENV=test jest --coverage  --verbose=false",
-    "test:lint": "yarn run lint && cross-env NODE_ENV=test jest --coverage  --verbose=false",
-    "test:watch": "cross-env NODE_ENV=test jest --watchAll --verbose=false",
-    "test:watchcoverage": "cross-env NODE_ENV=test jest --watchAll --coverage  --verbose=false",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "prettify": "prettier --write",
-    "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout gatsby build",
-
-    "develop": "gatsby develop",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\""
- 
-  },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
-  "main": "n/a",
   "dependencies": {
     "@babel/polyfill": "7.4.3",
     "@matejmazur/react-katex": "^3.0.2",
@@ -352,6 +349,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-router-hash-link": "^1.2.0",
+    "react-router-redux": "5.0.0-alpha.9",
     "react-swipeable": "^4.3.2",
     "react-vis": "1.11.6",
     "redux": "^3.7.2",
@@ -363,19 +361,7 @@
     "rxjs-compat": "^6.3.3",
     "styled-components": "^3.4.9",
     "warning": "3.0.0",
-    "whatwg-fetch": "^2.0.3",
-    "dotenv": "^7.0.0",
-    "gatsby": "2.3.29",
-    "gatsby-image": "^2.0.40",
-    "gatsby-plugin-react-helmet": "^3.0.12",
-    "gatsby-plugin-sass": "^2.0.11",
-    "gatsby-source-datocms": "2.1.4",
-    "gatsby-source-filesystem": "^2.0.32",
-    "gatsby-transformer-remark": "^2.3.12",
-    "node-sass": "^4.11.0",
-    "react-masonry-component": "^6.2.1",
-    "react-slick": "^0.23.2",
-    "slick-carousel": "^1.8.1"
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "@babel/cli": "7.4.3",
@@ -461,7 +447,8 @@
     "webpack-cli": "^3.3.0",
     "webpack-dev-middleware": "3.6.2",
     "webpack-hot-middleware": "^2.21.0"
-  },"husky": {
+  },
+  "husky": {
     "hooks": {
       "pre-commit": "yarn run lint:staged"
     }
