@@ -10,6 +10,9 @@
     "npm": ">=3",
     "node": ">=6"
   },
+  "keywords": [
+    "gatsby"
+  ],
   "author": "Maieutical Labs",
   "license": "UNLICENSED",
   "private": true,
