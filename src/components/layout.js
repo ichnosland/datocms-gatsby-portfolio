@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { StaticQuery, graphql } from "gatsby"
 import { HelmetDatoCms } from 'gatsby-source-datocms'
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
