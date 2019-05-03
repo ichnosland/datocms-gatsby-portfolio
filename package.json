@@ -364,7 +364,6 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-router-hash-link": "^1.2.0",
-    "react-router-redux": "5.0.0-alpha.9",
     "react-swipeable": "^4.3.2",
     "react-vis": "1.11.6",
     "redux": "^3.7.2",
