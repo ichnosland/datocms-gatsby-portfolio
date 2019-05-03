@@ -39,8 +39,8 @@ import viaggio from './images/viaggio.png';
 //import basepremium from './images/basepremium.png';
 import classe from './images/classe.png';
 import formazione from './images/formazione.png';
-import ceaverifiche from './images/ceaverifiche.png';
-import cover from './images/cover.png';
+//import ceaverifiche from './images/ceaverifiche.png';
+//import cover from './images/cover.png';
 
 import '../styles/index.sass'
 
