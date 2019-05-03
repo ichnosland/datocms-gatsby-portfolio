@@ -35,10 +35,10 @@ import InputField from 'components/FormElements/Field';
 import AlertCookies from 'components/AlertCookies';
 import AlertBanner from 'components/AlertBanner';
 
-import viaggio from './images/viaggio.png';
+//import viaggio from './images/viaggio.png';
 //import basepremium from './images/basepremium.png';
-import classe from './images/classe.png';
-import formazione from './images/formazione.png';
+//import classe from './images/classe.png';
+//import formazione from './images/formazione.png';
 //import ceaverifiche from './images/ceaverifiche.png';
 //import cover from './images/cover.png';
 
