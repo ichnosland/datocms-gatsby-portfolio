@@ -1,0 +1,14 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+import { Route } from 'react-router-dom';
+
+import {{ properCase name }}App, { {{ properCase name }} } from '../index';
+
+describe('<{{ properCase name }} />', () => {
+  it('should render its Route', () => {
+    const renderedComponent = shallow(
+      <{{ properCase name }} />
+    );
+    expect(renderedComponent.find(Route).length).toBe(2);
+  });
+});

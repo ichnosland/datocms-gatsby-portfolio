@@ -1,0 +1,16 @@
+import { fromJS } from 'immutable';
+
+import configurationReducer from '../reducer';
+
+describe('configurationReducer', () => {
+  it('returns the initial state', () => {
+    expect(configurationReducer(undefined, {})).toEqual(fromJS({
+      disciplinaId: {{ disciplinaId }},
+      product: '{{ lowerCase name }}',
+      hasPremium: {{ hasPremium }},
+      titoloApplicazione: '{{ titoloApplicazione }}',
+      homePage: '{{ homePage }}',
+      hasClassi: {{ hasClassi }},
+    }));
+  });
+});

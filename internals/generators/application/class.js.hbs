@@ -1,0 +1,54 @@
+/**
+ *
+ * {{ properCase name }}
+ *
+ */
+
+import React from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
+
+import { alatin } from 'style/theme';
+import injectReducer from 'utils/injectReducer';
+import HomePage from 'containers/HomePage';
+import NotFoundPage from 'containers/NotFoundPage';
+
+import configurationReducer from './reducer';
+import configuration from './configuration';
+
+export class {{ properCase name }} extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  render() {
+    return (
+      <ThemeProvider theme={alatin}>
+        <div>
+          <Helmet>
+            <title>{configuration.titoloApplicazione}</title>
+          </Helmet>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </div>
+      </ThemeProvider>
+    );
+  }
+}
+
+{{ properCase name }}.propTypes = {
+
+};
+
+const withReducer = injectReducer({ key: 'configuration', reducer: configurationReducer });
+
+const {{ properCase name }}Connect = connect();
+
+const {{ properCase name }}App = compose(
+  withRouter,
+  withReducer,
+  {{ properCase name }}Connect
+)({{ properCase name }});
+
+export default {{ properCase name }}App;
