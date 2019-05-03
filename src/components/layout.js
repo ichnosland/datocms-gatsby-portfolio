@@ -3,6 +3,45 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { StaticQuery, graphql } from "gatsby"
 import { HelmetDatoCms } from 'gatsby-source-datocms'
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import provideScrollPosition from 'react-provide-scroll-position';
+
+import { cookieSet } from 'common/cookies';
+import ZendeskTicket from 'containers/ZendeskTicket';
+import { modalSetData } from 'containers/ModalBox/actions';
+import Footer from 'components/Footer';
+import LandingMenuBar from 'components/LandingMenuBar';
+import LandingCard from 'components/LandingCard';
+import LandingForm from 'components/LandingForm';
+import { FirstSection, Section } from 'components/Section';
+import Container, { ActionBox } from 'components/Container';
+import { StickyWrap, StickyTop, StickyBottom } from 'components/StickyFooter';
+import Svg from 'components/Svg';
+import icon from 'icons/globals';
+import FlexBox from 'components/FlexBox';
+import { Table, Tr, Td, NoteTd } from 'components/Tables';
+import { H2 } from 'components/Heading';
+import { ActionButtonLink } from 'components/ButtonLink';
+import { ButtonStyle, ActionButtonStyle } from 'components/Button';
+import Separator from 'components/Paragraph/Separator';
+import media from 'style/mediainjector';
+import { colore } from 'style/color';
+import { landingPageToggleMenu } from 'containers/LandingPage/actions';
+import { singleFieldRequired, atLeastNChars, singleFieldValidateEmail } from 'common/forms';
+import { userDataSet } from 'containers/User/actions';
+import InputField from 'components/FormElements/Field';
+import AlertCookies from 'components/AlertCookies';
+import AlertBanner from 'components/AlertBanner';
+
+import viaggio from './images/viaggio.png';
+import basepremium from './images/basepremium.png';
+import classe from './images/classe.png';
+import formazione from './images/formazione.png';
+import ceaverifiche from './images/ceaverifiche.png';
+import cover from './images/cover.png';
 
 import '../styles/index.sass'
 
